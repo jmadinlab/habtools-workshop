@@ -1,5 +1,5 @@
 
-# `habtools`
+# Instructions
 
 ### Aims
 
@@ -66,7 +66,6 @@ biodiversity lives (Pizarro et al. 2017).
 ### Gear list
 
 - Camera, charged
-- Reef recorder (check clip)
 - Three scale markers (6 targets)
 - GPS to mark center of reef record
 - Depth gauge for depths at markers
@@ -95,28 +94,31 @@ biodiversity lives (Pizarro et al. 2017).
 
 ### Labwork
 
-- Export photos from camera into folder on lab computer
-- Open `MetaShape`
-- Start new project
-- Add `chunk` (button in `Workspace` panel)
-- Add `photos` and select all the reef record photos (button in
-  `Workspace` panel)
-- `Tools` -\> `Markers` -\> `Detect Markers...`
-- Go to `Reference` panel
+- Export photos from camera into the `habtools-workshop/sfm/images/`
+  folder on your computer.
+- Open `MetashapePro`.
+- From the `Workflow` menu, select `Add Photos` and select all the
+  photos in the `habtools-workshop/sfm/images/` folder.
+- From the `Workflow` menu, select `Align Photos` and ensure the
+  selections reflect the following screeshot, then click `OK`:
+
+![](figs/align-photos.png)
+
+- Following processing, which can take a while if you have lots of
+  photographs, you can view what’s called the sparse point cloud.
+- Next you detect markers using `Tools` -\> `Markers` -\>
+  `Detect Markers...`. Click `OK`.
+- Go to `Reference` panel.
 - Open `Reference` settings (wrench and hammer symbol at the topright of
   reference pane)
-- Choose WGS84 coordinate system (to give us lat and lon)
-- Change “camera accuracy (m)” and “camera accuracy (deg)” to 2.
-- Change ground altitude to -1. Leave all other defaults. (\*SKIP)
-- Open “orientation markers” spreadsheet (in this module’s `docs`
-  folder)
-- Enter target 1 lat and lon at top of spreadsheet.
-- Enter distances and angles to targets 2 and 3 into columns and
-  retrieve these targets’ coordinates.
-- Enter into reference pane in Metashape.
+- Choose `Local Coordinates (m)` coordinate system (note that you can
+  also create geo-referenced surfaces if you take a GPS coordinate for
+  your surface).
 - Highlight target pairs from scale bars (using crtl key), right-click
-  and add scale
-- Enter scale distnaces in reference pane below the target pane.
+  `Create Scale Bar`.
+- Enter scale distances in reference pane below the target pane (e.g.,
+  0.08 m for 8 cm).
+- 
 - Start workflow process: align cameras first (accuracy Low).
 - Using the measurement tool, check that the scale in the sparse cloud
   is approximately correct. All cameras should appear above the sparse
