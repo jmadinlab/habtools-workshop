@@ -102,7 +102,7 @@ biodiversity lives (Pizarro et al. 2017).
 - From the `Workflow` menu, select `Align Photos` and ensure the
   selections reflect the following screeshot, then click `OK`:
 
-![](figs/align-photos.png)
+![](figs/align-photos.png){:height=“36px” width=“36px”}
 
 - Following processing, which can take a while if you have lots of
   photographs, you can view what’s called the sparse point cloud.
