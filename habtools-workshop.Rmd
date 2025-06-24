@@ -58,7 +58,7 @@ Many studies have found relationships between surface rugosity and the richness 
 - From the `Workflow` menu, select `Add Photos` and select all the photos in the `habtools-workshop/sfm/images/` folder.
 - From the `Workflow` menu, select `Align Photos` and ensure the selections reflect the following screeshot, then click `OK`:
 
-![](figs/align-photos.png){:height="36px" width="36px"}
+<img src="figs/align-photos.png" width="400">
 
 - Following processing, which can take a while if you have lots of photographs, you can view what's called the sparse point cloud. 
 - Next you detect markers using `Tools` -> `Markers` -> `Detect Markers...`. Click `OK`. 
