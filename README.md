@@ -60,5 +60,3 @@ download.
 If you’re interested in exporting and visualizing a 3D mesh, download
 [Meshlab](https://www.meshlab.net/#download). It’s free. 3D meshes are
 useful for 3D printing.
-
-![](data/3dmesh.stl)
