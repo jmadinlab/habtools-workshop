@@ -43,9 +43,10 @@ update it before the course so that we are all using the same versions.
   - `habtools`  
   - `rgl` (optional, as it might take some setting-up on some computers)
 
-> If you are new to R and Rstudio, you can familiarize yourself with
-> some basics by following a beginner introduction
-> (e.g. <https://rladiessydney.org/courses/01-basicbasics-0> or
+> You do not need to be good at R coding for this workshop. However, if
+> you are new to R and Rstudio, and would like to familiarize yourself
+> with the basics, here are some beginner introduction options
+> (<https://rladiessydney.org/courses/01-basicbasics-0>,
 > <https://r4ds.hadley.nz/intro>).
 
 ### GIS software

@@ -17,7 +17,7 @@ library(rgl) # optional and might not work on some computers
 
 One of community ecology's few paradigms is that complex habitats tend to contain more species and at higher abundances than simple habitats. Currently, human and natural disturbances are changing the complexity of habitats faster than at any previous time in history. Understanding and predicting the effects of these changes on biodiversity and ecosystem function is now of paramount importance. Yet, we have only a crude, correlative understanding of how complexity changes affect biodiversity, predicting that if habitat becomes flatter, species' diversity and abundances decline. We have next to no idea of how complexity changes affect ecosystem functions and services. Generating accurate predictions requires integration of the geometric and ecological principles that mechanistically underpin complexity-ecological relationships. 
 
-Habitat geometry can be measured in many ways. However, in marine systems, surface rugosity has become gold standard, because it can be measured quickly with a tape measure and a length of chain. The chain is draped as closely as possible over the the benthos and then the linear distance between the two ends of the chain is measured (Fig. 1). Rugosity is calculated as $R = \frac{D_{chain}}{L_{chain}}$. If the surface is completely flat, then $D_{chain}$ will be the same as $L_{chain}$. On more convoluted surfaces, the linear distance $D_{chain}$ is shorter, and rugosity is greater. 
+Habitat geometry can be measured in many ways. However, in marine systems, surface rugosity has become gold standard, because it can be measured quickly with a tape measure and a length of chain. The chain is draped as closely as possible over the the benthos and then the linear distance between the two ends of the chain is measured (Figure below). Rugosity is calculated as $R = \frac{D_{chain}}{L_{chain}}$. If the surface is completely flat, then $D_{chain}$ will be the same as $L_{chain}$. On more convoluted surfaces, the linear distance $D_{chain}$ is shorter, and rugosity is greater. 
 
 <img src="figs/rugosity.png" width="500">
 
@@ -25,9 +25,9 @@ Many studies have found relationships between surface rugosity and the richness 
 
 ### Objectives
 
-1. Generate a digital elevation model (DEM) and an orthomosaic.
+1. Generate a digital elevation model (DEM), an orthomosaic, and optionally a 3d mesh for printing.
 2. Calculate three geometric measures (rugosity, fractal dimension and height range) and explore the relationships among them.
-3. Think about reef features that could be annotated or measured over your orthomosaic, especially those you believe to be related to habitat complexity. Examples include,  larval settlement, species richness, territorial grazer density, fish size structure, spatial clustering of primary producers, etc. 
+3. Think about reef features that could be annotated or measured using the orthomosaic, especially those you believe to be related to habitat complexity. Examples include, larval settlement, species richness, territorial grazer density, fish size structure, spatial clustering of primary producers, and so on. 
 
 ### Gear list
 
@@ -132,8 +132,8 @@ dem_list <- dem_split(dem_square, 0.1)
 length(dem_list)
 plot(dem)
 rect(0, 0, 0.5, 0.5)
-plot(dem_list[[1]], add=TRUE)
-plot(dem_list[[25]], add=TRUE)
+plot(dem_list[[1]], add=TRUE, legend=FALSE)
+plot(dem_list[[25]], add=TRUE, legend=FALSE)
 
 rdhs <- lapply(dem_list, rdh, method_fd="sd", lvec=c(0.031, 0.063, 0.125, 0.25, 0.5), parallel=TRUE)
 rdhs <- rdhs %>% 
@@ -215,13 +215,14 @@ rdhs <- rdhs %>%
 
 rdhs <- cbind(rdhs, species=ann$species)
 
-ggplot(data=rdhs, aes(x=species, y=D, color=species)) +
+ggplot(data=rdhs, aes(x=species, y=R)) +
+  scale_y_log10() +
   geom_boxplot() +
   geom_jitter(width=0.1)
 
 ```
 
-##### References
+##### Useful references
 
 - Pizarro, O., Friedman, A., Bryson, M., Williams, S. B. & Madin, J. A simple, fast, and repeatable survey method for underwater visual 3D benthic mapping and monitoring. Ecology and Evolution 7, 1770–1782 (2017). [[link](https://doi.org/10.1002/ece3.2701)]
 

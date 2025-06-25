@@ -1,19 +1,6 @@
 
 # The *habtools* & biodiversity workshop
 
-### Aims
-
-- To develop an understanding of habitat complexity, including
-  familiarity with geometric measures like rugosity and fractal
-  dimension.
-- To become familiar with how to capture benthic 3D meshes, digital
-  evevation models (DEMs) and orthomosaics.
-- To annotate ecological or environmental details for potential projects
-  looking at the relationship between habitat complexity and
-  biodiversity.
-
-### Introduction
-
 One of community ecology’s few paradigms is that complex habitats tend
 to contain more species and at higher abundances than simple habitats.
 Currently, human and natural disturbances are changing the complexity of
@@ -31,13 +18,13 @@ Habitat geometry can be measured in many ways. However, in marine
 systems, surface rugosity has become gold standard, because it can be
 measured quickly with a tape measure and a length of chain. The chain is
 draped as closely as possible over the the benthos and then the linear
-distance between the two ends of the chain is measured (Fig. 1).
+distance between the two ends of the chain is measured (Figure below).
 Rugosity is calculated as $R = \frac{D_{chain}}{L_{chain}}$. If the
 surface is completely flat, then $D_{chain}$ will be the same as
 $L_{chain}$. On more convoluted surfaces, the linear distance
 $D_{chain}$ is shorter, and rugosity is greater.
 
-<img src="figs/rugosity.png" width="400">
+<img src="figs/rugosity.png" width="500">
 
 Many studies have found relationships between surface rugosity and the
 richness and abundance of associated species. Many studies have found no
@@ -53,24 +40,25 @@ biodiversity lives (Pizarro et al. 2017).
 
 ### Objectives
 
-1.  Generate a digital elevation model (DEM) and an orthomosaic.
+1.  Generate a digital elevation model (DEM), an orthomosaic, and
+    optionally a 3d mesh for printing.
 2.  Calculate three geometric measures (rugosity, fractal dimension and
     height range) and explore the relationships among them.
-3.  Think about reef features that could be annotated or measured over
-    your orthomosaic, especially those you believe to be related to
+3.  Think about reef features that could be annotated or measured using
+    the orthomosaic, especially those you believe to be related to
     habitat complexity. Examples include, larval settlement, species
     richness, territorial grazer density, fish size structure, spatial
-    clustering of primary producers, etc.
+    clustering of primary producers, and so on.
 
 ### Gear list
 
-- Camera, charged
-- Three scale markers (6 targets)
-- A compass (often found in phones)
-- GPS (often found in phones)
-- Depth gauge for depths at markers
-- Transect tape for measuring between scale markers
-- Slate for notes (e.g., GPS, depths)
+- Camera, charged.
+- Three scale markers (6 targets).
+- A compass (often found in phones).
+- GPS (often found in phones).
+- Depth gauge for depths at markers.
+- Transect tape for measuring between scale markers.
+- Slate for notes (e.g., GPS, depths).
 
 ### Fieldwork
 
@@ -278,13 +266,13 @@ dem_sample(dem_square, L=0.1, plot=TRUE)
 ![](habtools-workshop_files/figure-gfm/unnamed-chunk-2-6.png)<!-- -->
 
     ## class      : RasterLayer 
-    ## dimensions : 196, 196, 38416  (nrow, ncol, ncell)
+    ## dimensions : 195, 195, 38025  (nrow, ncol, ncell)
     ## resolution : 0.000512008, 0.000512008  (x, y)
-    ## extent     : 0.01333015, 0.1136837, 0.2885462, 0.3888998  (xmin, xmax, ymin, ymax)
+    ## extent     : 0.2237654, 0.323607, 0.1590082, 0.2588497  (xmin, xmax, ymin, ymax)
     ## crs        : NA 
     ## source     : memory
     ## names      : dem 
-    ## values     : -0.008904768, 0.08446791  (min, max)
+    ## values     : -0.01702718, 0.0301676  (min, max)
 
 3.  Re-project DEM (if you have a GPS coordinate)
 
@@ -366,14 +354,15 @@ rdhs <- rdhs %>%
 
 rdhs <- cbind(rdhs, species=ann$species)
 
-ggplot(data=rdhs, aes(x=species, y=D, color=species)) +
+ggplot(data=rdhs, aes(x=species, y=R)) +
+  scale_y_log10() +
   geom_boxplot() +
   geom_jitter(width=0.1)
 ```
 
 ![](habtools-workshop_files/figure-gfm/unnamed-chunk-5-3.png)<!-- -->
 
-##### References
+##### Useful references
 
 - Pizarro, O., Friedman, A., Bryson, M., Williams, S. B. & Madin, J. A
   simple, fast, and repeatable survey method for underwater visual 3D
