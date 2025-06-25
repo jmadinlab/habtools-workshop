@@ -1,5 +1,5 @@
 
-# The *habtools* & biodiversity workshop
+# The *habtools* & biodiversity workshop <img src="figs/habtools_logo.png" align="right" alt="" width="120"/>
 
 This workshop is a one-day introduction to creating 3D models of natural
 surfaces and analyzing these using the

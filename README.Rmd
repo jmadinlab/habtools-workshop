@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-# The *habtools* & biodiversity workshop
+# The *habtools* & biodiversity workshop <img src="figs/habtools_logo.png" align="right" alt="" width="120"/>
 
 This workshop is a one-day introduction to creating 3D models of natural surfaces and analyzing these using the *[habtools](https://jmadinlab.github.io/habtools/)* R package. The workshop will also provide guidance on how to annotate surfaces with plants, animals and other kinds of data. The workshop has three parts:
 
