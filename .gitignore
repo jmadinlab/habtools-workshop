@@ -6,3 +6,6 @@
 
 *.tif
 sfm/
+*demo*
+annotations*
+*.pptx
