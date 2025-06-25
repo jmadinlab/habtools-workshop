@@ -54,3 +54,11 @@ If you would like to annotate the orthomosaic you create, as might be
 done in a biodiversity analysis, you can use either ArcGIS or
 [QGIS](https://qgis.org/download/), the latter of which is a free
 download.
+
+### Meshlab
+
+If you’re interested in exporting and visualizing a 3D mesh, download
+[Meshlab](https://www.meshlab.net/#download). It’s free. 3D meshes are
+useful for 3D printing.
+
+![](data/3dmesh.stl)

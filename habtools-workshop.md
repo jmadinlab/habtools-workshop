@@ -37,10 +37,7 @@ surface is completely flat, then $D_{chain}$ will be the same as
 $L_{chain}$. On more convoluted surfaces, the linear distance
 $D_{chain}$ is shorter, and rugosity is greater.
 
-<figure>
-<img src="figs/rugosity.png" alt="Figure 1: Rugosity" />
-<figcaption aria-hidden="true">Figure 1: Rugosity</figcaption>
-</figure>
+<img src="figs/rugosity.png" width="400">
 
 Many studies have found relationships between surface rugosity and the
 richness and abundance of associated species. Many studies have found no
@@ -283,11 +280,11 @@ dem_sample(dem_square, L=0.1, plot=TRUE)
     ## class      : RasterLayer 
     ## dimensions : 196, 196, 38416  (nrow, ncol, ncell)
     ## resolution : 0.000512008, 0.000512008  (x, y)
-    ## extent     : 0.2462938, 0.3466474, 0.1021753, 0.2025289  (xmin, xmax, ymin, ymax)
+    ## extent     : 0.01333015, 0.1136837, 0.2885462, 0.3888998  (xmin, xmax, ymin, ymax)
     ## crs        : NA 
     ## source     : memory
     ## names      : dem 
-    ## values     : -0.01531726, 0.02802498  (min, max)
+    ## values     : -0.008904768, 0.08446791  (min, max)
 
 3.  Re-project DEM (if you have a GPS coordinate)
 
