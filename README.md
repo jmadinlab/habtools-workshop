@@ -45,8 +45,8 @@ update it before the course so that we are all using the same versions.
 
 > If you are new to R and Rstudio, you can familiarize yourself with
 > some basics by following a beginner introduction
-> (e.g. <https://rladiessydney.org/courses/ryouwithme/01-basicbasics-0/>
-> or <https://r4ds.hadley.nz/intro>).
+> (e.g. <https://rladiessydney.org/courses/01-basicbasics-0> or
+> <https://r4ds.hadley.nz/intro>).
 
 ### GIS software
 
