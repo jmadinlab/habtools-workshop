@@ -4,12 +4,12 @@
 This workshop is a one-day introduction to creating 3D models of natural
 surfaces and analyzing these using the
 *[habtools](https://jmadinlab.github.io/habtools/)* R package. The
-workshop will also give guidance on annotating surface with plants and
-animals. The workshop has three parts:
+workshop will also provide guidance on how to annotate surfaces with
+plants, animals and other kinds of data. The workshop has three parts:
 
 1.  Capturing a 3D surface
-2.  Estimating metrics
-3.  Biodiversity relationships
+2.  Estimating complexity metrics
+3.  Exploring biodiversity relationships
 
 An introduction to the workshop can be found
 [here](https://docs.google.com/presentation/d/1EcmqFs0lL1LlaK2j6uU90SUzEh0ms94cLV1RxN7I0Pc/edit?usp=sharing).
@@ -41,7 +41,7 @@ update it before the course so that we are all using the same versions.
   - `dplyr`  
   - `raster`  
   - `habtools`  
-  - `rgl` (might not work on some computers)
+  - `rgl` (optional, as it might take some setting-up on some computers)
 
 > If you are new to R and Rstudio, you can familiarize yourself with
 > some basics by following a beginner introduction
@@ -50,7 +50,7 @@ update it before the course so that we are all using the same versions.
 
 ### GIS software
 
-If you would like to annotate your orthomosaic, as might be done in a
-biodiversity analysis, you can use ArcGIS or
-[QGIS](https://qgis.org/download/), the latter of which is free to
+If you would like to annotate the orthomosaic you create, as might be
+done in a biodiversity analysis, you can use either ArcGIS or
+[QGIS](https://qgis.org/download/), the latter of which is a free
 download.
