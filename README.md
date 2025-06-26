@@ -61,3 +61,27 @@ download.
 If you’re interested in exporting and visualizing a 3D mesh, download
 [Meshlab](https://www.meshlab.net/#download). It’s free. 3D meshes are
 useful for 3D printing.
+
+### Some useful references
+
+- Pizarro, O., Friedman, A., Bryson, M., Williams, S. B. & Madin, J. A
+  simple, fast, and repeatable survey method for underwater visual 3D
+  benthic mapping and monitoring. Ecology and Evolution 7, 1770–1782
+  (2017). \[[link](https://doi.org/10.1002/ece3.2701)\]
+
+- Schiettekatte N, Asbury M, Chen G, Dornelas M, Reichert J,
+  Torres-Pulliza D, Zawada KJA, Madin JS (2025). “habtools: an R package
+  to calculate 3D metrics for surfaces and objects.” Methods in Ecology
+  and Evolution. \[[link](https://doi.org/10.1111/2041-210X.70027)\]
+
+- Torres-Pulliza D, Dornelas M, Pizarro O, Bewley M, Blowes SA, Boutros
+  N, Brambilla V, Chase TJ, Frank G, Friedman A, Hoogenboom MO, Williams
+  S, Zawada KJA, Madin JS (2020) A geometric basis for surface habitat
+  complexity and biodiversity. *Nature Ecology & Evolution* 4:1495-1501.
+  \[[link](https://doi.org/10.1038/s41559-020-1281-8)\]
+
+- Torres-Pulliza, D., Charendoff, J., Couch, C., Suka, R., Gray, A.,
+  Lichowski, F., … & Oliver, T. (2024). Processing coral reef imagery
+  using Structure-from-Motion photogrammetry: Standard operating
+  procedures (2023 update).
+  \[[link](https://repository.library.noaa.gov/view/noaa/60890)\]

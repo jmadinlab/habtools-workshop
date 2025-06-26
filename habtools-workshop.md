@@ -1,17 +1,21 @@
 
-# The *habtools* & biodiversity workshop
+# Step 1: Capturing a 3D surface
 
-### Goals
+### Project set-up
 
-1.  Generate a digital elevation model (DEM), an orthomosaic, and
-    optionally a 3d mesh for printing.
-2.  Calculate three geometric measures (rugosity, fractal dimension and
-    height range) and explore the relationships among them.
-3.  Think about reef features that could be annotated or measured using
-    the orthomosaic, especially those you believe to be related to
-    habitat complexity. Examples include, larval settlement, species
-    richness, territorial grazer density, fish size structure, spatial
-    clustering of primary producers, and so on.
+- Open RStudio.
+- `File` \> `New Project...`.
+- Select `Version Control` and then `Git`.
+- Copy `https://github.com/jmadinlab/habtools-workshop` and paste into
+  the `Repository URL` field. Press tab and the `Project directory name`
+  should auto-fill.
+- Select `Browse...` and choose where you want to store the project on
+  your computer. Then click `OK`.
+- In the bottom-right pane, click `Folder` to create a new folder and
+  call is `sfm`.
+- Click on the `sfm` folder in the file list, and create another folder
+  called `images`. This is where you will store the images you take in
+  the field.
 
 ### Gear list
 
@@ -28,7 +32,7 @@
 - Find a natural surface you want to model.
 - Place the three sets of targets in an L shape; ideally at the same
   vertical height. Measure distances between one target on each set.
-- Image the surface as instructed. You want at least 100 images.
+- Image the surface as instructed. You want at least 150 images.
 - Record GPS coordinates above one target.
 - Pick everything up.
 
@@ -85,19 +89,14 @@
 - Export the DEM and orthomosaic into a folder called
   `habtools-workshop/data`.
 
-### RStudio
+# Step 2: Estimating complexity metrics
 
-- Open RStudio.
-- `File` \> `New Project...`.
-- Select `Version Control` and then `Git`.
-- Copy `https://github.com/jmadinlab/habtools-workshop` and paste into
-  the `Repository URL` field. Press tab and the `Project directory name`
-  should auto-fill.
-- Select `Browse...` and choose where you want to store the project on
-  your computer. Then click `OK`.
-- Open `habtools-workshop.Rmd`
+- Go to RStudio and open `habtools-workshop.Rmd`.
 
-1.  Load DEM
+- If RStudio is closed, go the the `habtools-workshop` folder on your
+  computer and double-click the `habtools-workshop.Rproj` file.
+
+- Load and plot the DEM
 
 ``` r
 dem <- raster("data/dem.tif")
@@ -106,7 +105,7 @@ plot(dem)
 
 ![](habtools-workshop_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
-2.  Surface complexity
+- Crop the DEM and calculate some metrics
 
 ``` r
 dem_square <- dem_crop(dem, x0=0.25, y0=0.25, L=0.5, plot=TRUE)
@@ -231,15 +230,16 @@ dem_sample(dem_square, L=0.1, plot=TRUE)
     ## class      : RasterLayer 
     ## dimensions : 195, 195, 38025  (nrow, ncol, ncell)
     ## resolution : 0.000512008, 0.000512008  (x, y)
-    ## extent     : 0.2744542, 0.3742958, 0.3771236, 0.4769651  (xmin, xmax, ymin, ymax)
+    ## extent     : 0.3686637, 0.4685053, 0.27677, 0.3766116  (xmin, xmax, ymin, ymax)
     ## crs        : NA 
     ## source     : memory
     ## names      : dem 
-    ## values     : -0.01943417, 0.04123395  (min, max)
+    ## values     : -0.02380816, -0.006555019  (min, max)
 
-3.  Re-project DEM (if you have a GPS coordinate)
+- Re-project DEM (if you have a GPS coordinate)
 
 ``` r
+# Change to your lat, lon values
 lat <- 43.020704
 lon <- 144.836736
 
@@ -265,7 +265,7 @@ crs(ort) <- sr
 writeRaster(ort, filename="data/ortho-crs.tif", overwrite=TRUE)
 ```
 
-4.  Explore in GIS
+# Step 3: Exploring biodiversity relationships
 
 Open ArcGIS or QGIS and load the re-projected DEM and orthomosaic. You
 can print your orthomosaic on underwater paper and annotate plants and
@@ -273,22 +273,31 @@ animals. You can add these annotations in GIS so you have a spatial map
 of your study taxa. In QGIS:
 
 - `Layer` -\> `Create Layer...` -\> `New Shapefile Layer...`
+
 - File name. Click little dotted box. Select `habtools-workshop/data`
   folder. Write `annotations`
+
 - Geometry type. Select `Point` (you can also create polygons to outline
   areas)
+
 - Add a new field called `species`
+
 - Click `OK`
+
 - Double-clock the `annotations` layer in the left-hand panel. Select
   `Labels`. At top choose `Single labels` and select species as the
   `Value`. Also, select `Draw text buffer` lower down in the menu. Click
   `OK`.
+
 - Click the pencil icon (Toggle Editing).
+
 - Click the `Add Point Feature` icon (three dots and a star-like thing)
+
 - Click on the surface to annotate, and enter your species names.
+
 - Don’t forget to save (little disk icon)
 
-5.  Open annotations
+- Open annotations
 
 ``` r
 ann <- read_sf("data/annotations.shp")
@@ -302,13 +311,17 @@ text(ann, ann$species)
 
 ![](habtools-workshop_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
+- Crop surface around annotations.
+
 ``` r
 dem_list <- dem_crop(dem, x0=st_coordinates(ann)[,1], st_coordinates(ann)[,2], L=0.1, plot=TRUE)
 points(ann, col="red", pch=4)
 text(ann, ann$species)
 ```
 
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
+![](habtools-workshop_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+- Calculate complexity metrics in vicinity of annotations.
 
 ``` r
 rdhs <- lapply(dem_list, rdh, lvec=c(0.012, 0.025, 0.05, 0.1), parallel=TRUE)
@@ -317,34 +330,17 @@ rdhs <- rdhs %>%
 
 rdhs <- cbind(rdhs, species=ann$species)
 
+ggplot(data=rdhs, aes(x=R, y=H, color=species, size=D)) +
+  geom_point()
+```
+
+![](habtools-workshop_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+``` r
 ggplot(data=rdhs, aes(x=species, y=R)) +
   scale_y_log10() +
   geom_boxplot() +
   geom_jitter(width=0.1)
 ```
 
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-5-3.png)<!-- -->
-
-##### Useful references
-
-- Pizarro, O., Friedman, A., Bryson, M., Williams, S. B. & Madin, J. A
-  simple, fast, and repeatable survey method for underwater visual 3D
-  benthic mapping and monitoring. Ecology and Evolution 7, 1770–1782
-  (2017). \[[link](https://doi.org/10.1002/ece3.2701)\]
-
-- Schiettekatte N, Asbury M, Chen G, Dornelas M, Reichert J,
-  Torres-Pulliza D, Zawada KJA, Madin JS (2025). “habtools: an R package
-  to calculate 3D metrics for surfaces and objects.” Methods in Ecology
-  and Evolution. \[[link](https://doi.org/10.1111/2041-210X.70027)\]
-
-- Torres-Pulliza D, Dornelas M, Pizarro O, Bewley M, Blowes SA, Boutros
-  N, Brambilla V, Chase TJ, Frank G, Friedman A, Hoogenboom MO, Williams
-  S, Zawada KJA, Madin JS (2020) A geometric basis for surface habitat
-  complexity and biodiversity. *Nature Ecology & Evolution* 4:1495-1501.
-  \[[link](https://doi.org/10.1038/s41559-020-1281-8)\]
-
-- Torres-Pulliza, D., Charendoff, J., Couch, C., Suka, R., Gray, A.,
-  Lichowski, F., … & Oliver, T. (2024). Processing coral reef imagery
-  using Structure-from-Motion photogrammetry: Standard operating
-  procedures (2023 update).
-  \[[link](https://repository.library.noaa.gov/view/noaa/60890)\]
+![](habtools-workshop_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
