@@ -87,58 +87,34 @@ library(rgl) # optional and might not work on some computers
 - Go to RStudio and open `habtools-workshop.Rmd`.
 - If RStudio is closed, go the the `habtools-workshop` folder on your computer and double-click the `habtools-workshop.Rproj` file. 
 
-- Load and plot the DEM
+1. Load and plot the DEM
 
 ```{r}
-
 dem <- raster("data/dem.tif")
-plot(dem)
 
 ```
 
-- Crop the DEM and calculate some metrics
+2. Crop the DEM and calculate some metrics
 
 ```{r}
 
-dem_square <- dem_crop(dem, x0=0.25, y0=0.25, L=0.5, plot=TRUE)
-plot(dem_square)
+# Crop DEM
 
 # Surface area
-surface_area(dem_square)
-surface_area(dem_square) / 0.5^2
 
 # Rugosity
-rg(dem_square)
-rg(dem_square, L0=0.001)
-rg(dem_square, L0=0.01)
 
 # Height range
-hr(dem_square)
 
 # Fractal dimension
-fd(dem_square, method="sd", lvec=c(0.031, 0.063, 0.125, 0.25, 0.5), diagnose=TRUE, parallel=TRUE)
 
-# dem split
+# DEM split
 
-dem_list <- dem_split(dem_square, 0.1)
-length(dem_list)
-plot(dem)
-rect(0, 0, 0.5, 0.5)
-plot(dem_list[[1]], add=TRUE, legend=FALSE)
-plot(dem_list[[25]], add=TRUE, legend=FALSE)
+# Metrics for dem list
 
-rdhs <- lapply(dem_list, rdh, method_fd="sd", lvec=c(0.031, 0.063, 0.125, 0.25, 0.5), parallel=TRUE)
-rdhs <- rdhs %>% 
-  plyr::ldply()
-
-ggplot(data=rdhs, aes(x=R, y=H, color=D, size=D)) +
-  geom_point()
-
-# plot3d(rdhs$R, rdhs$D, rdhs$H)
+# Plot RDH
 
 # Sample DEM
-
-dem_sample(dem_square, L=0.1, plot=TRUE)
 
 ```
 
@@ -193,10 +169,7 @@ Open ArcGIS or QGIS and load the re-projected DEM and orthomosaic.  You can prin
 ann <- read_sf("data/annotations.shp")
 ann <- st_transform(ann, crs=sr) # applying the same coordinate system as the DEM
 
-dem <- raster("data/dem-crs.tif")
-plot(dem)
-points(ann, col="red", pch=4)
-text(ann, ann$species)
+# Load DEM with coordinate system and plot annotations
 
 ```
 
@@ -204,28 +177,20 @@ text(ann, ann$species)
 
 ```{r}
 
-dem_list <- dem_crop(dem, x0=st_coordinates(ann)[,1], st_coordinates(ann)[,2], L=0.1, plot=TRUE)
-points(ann, col="red", pch=4)
-text(ann, ann$species)
+# Use dem_crop to capture surface around each annotation
+
+# Calculate complexity metrics in vicinity of annotations.
+
+# bind the species column to the data.frame
 
 ```
 
-- Calculate complexity metrics in vicinity of annotations.
+- Explore the data with plots
 
 ```{r}
 
-rdhs <- lapply(dem_list, rdh, lvec=c(0.012, 0.025, 0.05, 0.1), parallel=TRUE)
-rdhs <- rdhs %>% 
-  plyr::ldply()
+# Scatterplot
 
-rdhs <- cbind(rdhs, species=ann$species)
-
-ggplot(data=rdhs, aes(x=R, y=H, color=species, size=D)) +
-  geom_point()
-
-ggplot(data=rdhs, aes(x=species, y=R)) +
-  scale_y_log10() +
-  geom_boxplot() +
-  geom_jitter(width=0.1)
+# Boxplot 
 
 ```

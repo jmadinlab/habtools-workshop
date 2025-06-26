@@ -85,3 +85,7 @@ useful for 3D printing.
   using Structure-from-Motion photogrammetry: Standard operating
   procedures (2023 update).
   \[[link](https://repository.library.noaa.gov/view/noaa/60890)\]
+
+- Zawada KJA, Dornelas M, Madin JS (2019) Quantifying coral morphology.
+  *Coral Reefs*, 38:1281–1292.
+  \[[link](https://doi.org/10.1007/s00338-019-01842-4)\]

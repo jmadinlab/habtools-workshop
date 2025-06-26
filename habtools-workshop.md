@@ -92,149 +92,36 @@
 # Step 2: Estimating complexity metrics
 
 - Go to RStudio and open `habtools-workshop.Rmd`.
-
 - If RStudio is closed, go the the `habtools-workshop` folder on your
   computer and double-click the `habtools-workshop.Rproj` file.
 
-- Load and plot the DEM
+1.  Load and plot the DEM
 
 ``` r
 dem <- raster("data/dem.tif")
-plot(dem)
 ```
 
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
-
-- Crop the DEM and calculate some metrics
+2.  Crop the DEM and calculate some metrics
 
 ``` r
-dem_square <- dem_crop(dem, x0=0.25, y0=0.25, L=0.5, plot=TRUE)
-```
+# Crop DEM
 
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
-
-``` r
-plot(dem_square)
-```
-
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
-
-``` r
 # Surface area
-surface_area(dem_square)
-```
 
-    ## [1] 0.3777671
-
-``` r
-surface_area(dem_square) / 0.5^2
-```
-
-    ## [1] 1.511068
-
-``` r
 # Rugosity
-rg(dem_square)
-```
 
-    ## [1] 1.509668
-
-``` r
-rg(dem_square, L0=0.001)
-```
-
-    ## [1] 1.433975
-
-``` r
-rg(dem_square, L0=0.01)
-```
-
-    ## [1] 1.143267
-
-``` r
 # Height range
-hr(dem_square)
-```
 
-    ## [1] 0.1234203
-
-``` r
 # Fractal dimension
-fd(dem_square, method="sd", lvec=c(0.031, 0.063, 0.125, 0.25, 0.5), diagnose=TRUE, parallel=TRUE)
-```
 
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
+# DEM split
 
-    ## $D
-    ## [1] 2.145263
-    ## 
-    ## $data
-    ##       l          sd
-    ## 1 0.031 0.001750858
-    ## 2 0.063 0.003510580
-    ## 3 0.125 0.007879888
-    ## 4 0.250 0.013781664
-    ## 5 0.500 0.017142509
-    ## 
-    ## $lvec
-    ## [1] 0.031 0.063 0.125 0.250 0.500
-    ## 
-    ## $D_vec
-    ## [1] 2.018998 1.819969 2.193497 2.685172
-    ## 
-    ## $var
-    ## [1] 0.3701006
-    ## 
-    ## $method
-    ## [1] "sd"
+# Metrics for dem list
 
-``` r
-# dem split
-
-dem_list <- dem_split(dem_square, 0.1)
-length(dem_list)
-```
-
-    ## [1] 25
-
-``` r
-plot(dem)
-rect(0, 0, 0.5, 0.5)
-plot(dem_list[[1]], add=TRUE, legend=FALSE)
-plot(dem_list[[25]], add=TRUE, legend=FALSE)
-```
-
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-2-4.png)<!-- -->
-
-``` r
-rdhs <- lapply(dem_list, rdh, method_fd="sd", lvec=c(0.031, 0.063, 0.125, 0.25, 0.5), parallel=TRUE)
-rdhs <- rdhs %>% 
-  plyr::ldply()
-
-ggplot(data=rdhs, aes(x=R, y=H, color=D, size=D)) +
-  geom_point()
-```
-
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-2-5.png)<!-- -->
-
-``` r
-# plot3d(rdhs$R, rdhs$D, rdhs$H)
+# Plot RDH
 
 # Sample DEM
-
-dem_sample(dem_square, L=0.1, plot=TRUE)
 ```
-
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-2-6.png)<!-- -->
-
-    ## class      : RasterLayer 
-    ## dimensions : 195, 195, 38025  (nrow, ncol, ncell)
-    ## resolution : 0.000512008, 0.000512008  (x, y)
-    ## extent     : 0.3686637, 0.4685053, 0.27677, 0.3766116  (xmin, xmax, ymin, ymax)
-    ## crs        : NA 
-    ## source     : memory
-    ## names      : dem 
-    ## values     : -0.02380816, -0.006555019  (min, max)
 
 - Re-project DEM (if you have a GPS coordinate)
 
@@ -303,44 +190,23 @@ of your study taxa. In QGIS:
 ann <- read_sf("data/annotations.shp")
 ann <- st_transform(ann, crs=sr) # applying the same coordinate system as the DEM
 
-dem <- raster("data/dem-crs.tif")
-plot(dem)
-points(ann, col="red", pch=4)
-text(ann, ann$species)
+# Load DEM with coordinate system and plot annotations
 ```
-
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 - Crop surface around annotations.
 
 ``` r
-dem_list <- dem_crop(dem, x0=st_coordinates(ann)[,1], st_coordinates(ann)[,2], L=0.1, plot=TRUE)
-points(ann, col="red", pch=4)
-text(ann, ann$species)
+# Use dem_crop to capture surface around each annotation
+
+# Calculate complexity metrics in vicinity of annotations.
+
+# bind the species column to the data.frame
 ```
 
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
-
-- Calculate complexity metrics in vicinity of annotations.
+- Explore the data with plots
 
 ``` r
-rdhs <- lapply(dem_list, rdh, lvec=c(0.012, 0.025, 0.05, 0.1), parallel=TRUE)
-rdhs <- rdhs %>% 
-  plyr::ldply()
+# Scatterplot
 
-rdhs <- cbind(rdhs, species=ann$species)
-
-ggplot(data=rdhs, aes(x=R, y=H, color=species, size=D)) +
-  geom_point()
+# Boxplot 
 ```
-
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
-
-``` r
-ggplot(data=rdhs, aes(x=species, y=R)) +
-  scale_y_log10() +
-  geom_boxplot() +
-  geom_jitter(width=0.1)
-```
-
-![](habtools-workshop_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
