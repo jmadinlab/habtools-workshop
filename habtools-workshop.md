@@ -1,44 +1,7 @@
 
 # The *habtools* & biodiversity workshop
 
-One of community ecology’s few paradigms is that complex habitats tend
-to contain more species and at higher abundances than simple habitats.
-Currently, human and natural disturbances are changing the complexity of
-habitats faster than at any previous time in history. Understanding and
-predicting the effects of these changes on biodiversity and ecosystem
-function is now of paramount importance. Yet, we have only a crude,
-correlative understanding of how complexity changes affect biodiversity,
-predicting that if habitat becomes flatter, species’ diversity and
-abundances decline. We have next to no idea of how complexity changes
-affect ecosystem functions and services. Generating accurate predictions
-requires integration of the geometric and ecological principles that
-mechanistically underpin complexity-ecological relationships.
-
-Habitat geometry can be measured in many ways. However, in marine
-systems, surface rugosity has become gold standard, because it can be
-measured quickly with a tape measure and a length of chain. The chain is
-draped as closely as possible over the the benthos and then the linear
-distance between the two ends of the chain is measured (Figure below).
-Rugosity is calculated as $R = \frac{D_{chain}}{L_{chain}}$. If the
-surface is completely flat, then $D_{chain}$ will be the same as
-$L_{chain}$. On more convoluted surfaces, the linear distance
-$D_{chain}$ is shorter, and rugosity is greater.
-
-<img src="figs/rugosity.png" width="500">
-
-Many studies have found relationships between surface rugosity and the
-richness and abundance of associated species. Many studies have found no
-relationship at all, calling into questions what rugosity actually tells
-us about a habitat and how niches are distributed and partitioned.
-Advances in the way marine scientists can capture benthic surfaces have
-transformed our capacity to explore the geometric-biodiversity
-relationships (Torres-Pulliza et al. 2020). One such advance is the
-generation of surface structure from motion, which allows us to
-associate orthomosics of benthic cover (essentially stitched together
-photographs over large areas) with the 3D surfaces upon which the
-biodiversity lives (Pizarro et al. 2017).
-
-### Objectives
+### Goals
 
 1.  Generate a digital elevation model (DEM), an orthomosaic, and
     optionally a 3d mesh for printing.
@@ -238,8 +201,8 @@ length(dem_list)
 ``` r
 plot(dem)
 rect(0, 0, 0.5, 0.5)
-plot(dem_list[[1]], add=TRUE)
-plot(dem_list[[25]], add=TRUE)
+plot(dem_list[[1]], add=TRUE, legend=FALSE)
+plot(dem_list[[25]], add=TRUE, legend=FALSE)
 ```
 
 ![](habtools-workshop_files/figure-gfm/unnamed-chunk-2-4.png)<!-- -->
@@ -268,11 +231,11 @@ dem_sample(dem_square, L=0.1, plot=TRUE)
     ## class      : RasterLayer 
     ## dimensions : 195, 195, 38025  (nrow, ncol, ncell)
     ## resolution : 0.000512008, 0.000512008  (x, y)
-    ## extent     : 0.2237654, 0.323607, 0.1590082, 0.2588497  (xmin, xmax, ymin, ymax)
+    ## extent     : 0.2744542, 0.3742958, 0.3771236, 0.4769651  (xmin, xmax, ymin, ymax)
     ## crs        : NA 
     ## source     : memory
     ## names      : dem 
-    ## values     : -0.01702718, 0.0301676  (min, max)
+    ## values     : -0.01943417, 0.04123395  (min, max)
 
 3.  Re-project DEM (if you have a GPS coordinate)
 

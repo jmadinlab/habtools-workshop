@@ -10,7 +10,7 @@ This workshop is a one-day introduction to creating 3D models of natural surface
 2. Estimating complexity metrics
 3. Exploring biodiversity relationships
 
-An introduction to the workshop can be found [here](https://docs.google.com/presentation/d/1EcmqFs0lL1LlaK2j6uU90SUzEh0ms94cLV1RxN7I0Pc/edit?usp=sharing). During the workshop we will run through the steps found [here](habtools-workshop.md). 
+An introduction to the workshop can be found [here](https://docs.google.com/presentation/d/144kZaggJfIWfz6h4kGZpERBm7UxttPFXvin1WmoqDBE/edit?usp=sharing). During the workshop we will run through the steps found [here](habtools-workshop.md). 
 
 # Preparation
 
